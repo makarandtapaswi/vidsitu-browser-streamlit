@@ -70,7 +70,7 @@ def display_annot(sample):
             # create dataframe and show
             df = pd.DataFrame(data=d)
             st.dataframe(df)
-    
+
     except:
         st.write('Encountered error. See JSON below')
 
@@ -80,11 +80,9 @@ def display_annot(sample):
 
 
 st.sidebar.write('### Pick a sample')
-imultiplier = 200
-index2 = st.sidebar.slider(label=f"Multiplier {imultiplier}x", min_value=0, max_value=(len(annots) // imultiplier))
-index1 = st.sidebar.slider(label="Sample", min_value=0, max_value=imultiplier - 1)
-index = imultiplier * index2 + index1
-
+index = st.sidebar.number_input(
+                label="Sample", value=0, step=1,
+                min_value=0, max_value=len(annots)-1)
 st.write(f'Showing sample `{index}`')
 display_annot(annots[index])
 
